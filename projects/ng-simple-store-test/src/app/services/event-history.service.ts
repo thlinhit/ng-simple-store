@@ -15,7 +15,6 @@ export class EventHistoryService {
   }
 
   loadEventHistories(): void {
-      this.store.set(new EventHistory('hehe'));
+    this.store.set(new EventHistory('hehe'));
   }
-
 }

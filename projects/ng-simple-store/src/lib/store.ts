@@ -22,10 +22,10 @@ export class Store<T> {
 }
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class StoreFactory<T> {
-    build(initialData: T): Store<T> {
-        return new Store<T>(initialData);
-    }
+  build(initialData: T): Store<T> {
+    return new Store<T>(initialData);
+  }
 }
