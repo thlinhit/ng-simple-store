@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class Store<T> {
   private subject: BehaviorSubject<T>;
 
-  constructor(initialData: any) {
+  constructor(initialData: any, options: StoreOptions<T>) {
     this.subject = new BehaviorSubject(initialData);
   }
 
@@ -21,11 +21,22 @@ export class Store<T> {
   }
 }
 
+export interface StoreOptions<T> {
+  immuatable: boolean;
+  sharedSubscription: boolean;
+  getIdentifier?: (model: T) => string | number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class StoreFactory<T> {
-  build(initialData: T): Store<T> {
-    return new Store<T>(initialData);
+  private defaultOptions: StoreOptions<T> = {
+    immuatable: true,
+    sharedSubscription: false
+  };
+
+  build(initialData: T, options = this.defaultOptions): Store<T> {
+    return new Store<T>(initialData, options);
   }
 }
