@@ -1,49 +1,50 @@
-import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { shareReplay, map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
-export class Store<T> {
-  private subject: BehaviorSubject<T>;
-  private observable$: Observable<T>;
+export class Store<S = any> {
+    private store: BehaviorSubject<Readonly<S>>;
+    private state: S;
+    private readonly _initialState: Partial<S>;
 
-  constructor(initialData: any, options: StoreOptions<T>) {
-    this.subject = new BehaviorSubject(initialData);
+    constructor(protected initialState: Partial<S>) {
+        this._initialState = { ...initialState };
+        this._set(initialState as S);
+    }
 
-    this.observable$ = this.subject.asObservable().pipe(
-      // TODO need to clone data, check if changing data of a subscription can affact others'
-      options.sharedSubscription ? shareReplay(1) : map((data: T) => data)
-    );
-  }
+    public select<R>(project: (state: S) => R): Observable<R> {
+        return this.store.asObservable().pipe(
+            map((state) => project(state)),
+            distinctUntilChanged()
+        );
+    }
 
-  getValue(): T {
-    return this.subject.getValue();
-  }
+    public reset(): void {
+        this._set({ ...this._initialState } as S);
+    }
 
-  getObservable(): Observable<T> {
-    return this.observable$;
-  }
+    public destroy(): void {
+        this.store.complete();
+    }
 
-  set(data: T) {
-    this.subject.next(data);
-  }
-}
+    /** @internal */
+    _getState(): S {
+        return this.state;
+    }
 
-export interface StoreOptions<T> {
-  immuatable: boolean;
-  sharedSubscription: boolean;
-  getIdentifier?: (model: T) => string | number;
-}
+    /** @internal */
+    /** @visibleForTesting */
+    _set(newState: S): void {
+        this.state = newState;
 
-@Injectable({
-  providedIn: 'root'
-})
-export class StoreFactory<T> {
-  private defaultOptions: StoreOptions<T> = {
-    immuatable: true,
-    sharedSubscription: false
-  };
+        if (!this.store) {
+            this.store = new BehaviorSubject(this.state);
+            return;
+        }
 
-  build(initialData: T, options = this.defaultOptions): Store<T> {
-    return new Store<T>(initialData, options);
-  }
+        this._dispatch(this.state);
+    }
+
+    private _dispatch(state: S): void {
+        this.store.next(state);
+    }
 }
