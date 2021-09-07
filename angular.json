@@ -4,9 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "ng-simple-store": {
+      "projectType": "library",
       "root": "projects/ng-simple-store",
       "sourceRoot": "projects/ng-simple-store/src",
-      "projectType": "library",
       "prefix": "lib",
       "architect": {
         "build": {
@@ -14,19 +14,11 @@
           "options": {
             "tsConfig": "projects/ng-simple-store/tsconfig.lib.json",
             "project": "projects/ng-simple-store/ng-package.json"
-          }
-        ,          "configurations": {
+          },
+          "configurations": {
             "production": {
               "tsConfig": "projects/ng-simple-store/tsconfig.lib.prod.json"
             }
-          }
-},
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ng-simple-store/src/test.ts",
-            "tsConfig": "projects/ng-simple-store/tsconfig.spec.json",
-            "karmaConfig": "projects/ng-simple-store/karma.conf.js"
           }
         },
         "lint": {
@@ -36,9 +28,7 @@
               "projects/ng-simple-store/tsconfig.lib.json",
               "projects/ng-simple-store/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -63,9 +53,7 @@
               "projects/ng-simple-store-test/src/favicon.ico",
               "projects/ng-simple-store-test/src/assets"
             ],
-            "styles": [
-              "projects/ng-simple-store-test/src/styles.css"
-            ],
+            "styles": ["projects/ng-simple-store-test/src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -122,9 +110,7 @@
             "polyfills": "projects/ng-simple-store-test/src/polyfills.ts",
             "tsConfig": "projects/ng-simple-store-test/tsconfig.spec.json",
             "karmaConfig": "projects/ng-simple-store-test/karma.conf.js",
-            "styles": [
-              "projects/ng-simple-store-test/src/styles.css"
-            ],
+            "styles": ["projects/ng-simple-store-test/src/styles.css"],
             "scripts": [],
             "assets": [
               "projects/ng-simple-store-test/src/favicon.ico",
@@ -139,37 +125,7 @@
               "projects/ng-simple-store-test/tsconfig.app.json",
               "projects/ng-simple-store-test/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "ng-simple-store-test-e2e": {
-      "root": "projects/ng-simple-store-test-e2e/",
-      "projectType": "application",
-      "prefix": "",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/ng-simple-store-test-e2e/protractor.conf.js",
-            "devServerTarget": "ng-simple-store-test:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ng-simple-store-test:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "projects/ng-simple-store-test-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
