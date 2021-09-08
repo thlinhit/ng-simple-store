@@ -1,10 +1,13 @@
-import { ApiStatuses } from './entity.store';
 import { isNil } from './helper';
 
 export const enum API_STATUS {
     SUCCESS,
     LOADING,
     FAIL,
+}
+
+export interface ApiStatuses {
+    [id: string]: API_STATUS;
 }
 
 export function buildLoadingStatuses(ids: string | string[]): { apiStatuses: ApiStatuses } {

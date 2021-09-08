@@ -1,10 +1,6 @@
 import { Store } from './store';
 import { getEntityType, isNil, notEmpty } from './helper';
-import { API_STATUS } from './api-status';
-
-export interface ApiStatuses {
-    [id: string]: API_STATUS;
-}
+import { ApiStatuses } from './api-status';
 
 export interface EntityState<EntityType = any> {
     entities?: { [id: string]: EntityType };
