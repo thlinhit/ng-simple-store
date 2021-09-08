@@ -6,8 +6,7 @@
         "start": "ng start",
         "build": "ng build",
         "test": "jest --config projects/ng-simple-store/jest.config.js",
-        "lint": "ng lint",
-        "e2e": "ng e2e"
+        "lint": "ng lint"
     },
     "private": true,
     "dependencies": {
@@ -38,7 +37,6 @@
         "@types/faker": "^4.1.5",
         "faker": "^4.1.0",
         "ng-packagr": "^11.2.4",
-        "protractor": "~7.0.0",
         "ts-node": "~7.0.0",
         "tslint": "~6.1.0",
         "typescript": "~4.0.8",
