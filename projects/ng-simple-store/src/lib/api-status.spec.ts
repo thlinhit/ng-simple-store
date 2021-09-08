@@ -1,21 +1,14 @@
-import { API_STATUS } from './api-status.constant';
-import { ApiStatusService } from './api-status.service';
+import { API_STATUS, buildFailStatuses, buildLoadingStatuses, buildSuccessStatuses } from './api-status';
 
-describe('ApiStatusService', () => {
-    let service: ApiStatusService;
-
-    beforeEach(() => {
-        service = new ApiStatusService();
-    });
-
+describe('ApiStatus', () => {
     test.each([
         [null, { apiStatuses: {} }],
         [undefined, { apiStatuses: {} }],
         [[], { apiStatuses: {} }],
     ])('given %p as input, returns %p', (input, expectedResult) => {
-        expect(service.buildLoadingStatuses(input)).toEqual(expectedResult);
-        expect(service.buildSuccessStatuses(input)).toEqual(expectedResult);
-        expect(service.buildFailStatuses(input)).toEqual(expectedResult);
+        expect(buildLoadingStatuses(input)).toEqual(expectedResult);
+        expect(buildSuccessStatuses(input)).toEqual(expectedResult);
+        expect(buildFailStatuses(input)).toEqual(expectedResult);
     });
 
     test.each([
@@ -31,7 +24,7 @@ describe('ApiStatusService', () => {
             },
         ],
     ])('given %p as input, buildLoadingStatuses returns %p', (input, expectedResult) => {
-        expect(service.buildLoadingStatuses(input)).toEqual(expectedResult);
+        expect(buildLoadingStatuses(input)).toEqual(expectedResult);
     });
 
     test.each([
@@ -47,7 +40,7 @@ describe('ApiStatusService', () => {
             },
         ],
     ])('given %p as input, buildSuccessStatuses returns %p', (input, expectedResult) => {
-        expect(service.buildSuccessStatuses(input)).toEqual(expectedResult);
+        expect(buildSuccessStatuses(input)).toEqual(expectedResult);
     });
 
     test.each([
@@ -63,6 +56,6 @@ describe('ApiStatusService', () => {
             },
         ],
     ])('given %p as input, buildFailStatuses returns %p', (input, expectedResult) => {
-        expect(service.buildFailStatuses(input)).toEqual(expectedResult);
+        expect(buildFailStatuses(input)).toEqual(expectedResult);
     });
 });

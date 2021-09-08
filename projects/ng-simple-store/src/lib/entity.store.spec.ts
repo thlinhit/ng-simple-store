@@ -1,5 +1,5 @@
 import { EntityState, EntityStore } from './entity.store';
-import { API_STATUS } from './api-status.constant';
+import { API_STATUS } from './api-status';
 
 describe('EntityStore', () => {
     class ExampleEntity {

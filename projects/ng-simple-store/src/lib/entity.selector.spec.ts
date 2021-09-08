@@ -1,6 +1,6 @@
 import { EntityState, EntityStore } from './entity.store';
 import { EntitySelector } from './entity.selector';
-import { API_STATUS } from './api-status.constant';
+import { API_STATUS } from './api-status';
 
 describe('EntitySelector', () => {
     class ExampleEntity {

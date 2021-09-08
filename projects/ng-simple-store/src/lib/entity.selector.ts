@@ -3,7 +3,7 @@ import { EntityState } from './entity.store';
 import { getEntityType, isEmpty, isNil, compact } from './helper';
 import { combineLatest, Observable } from 'rxjs';
 import { map, publishReplay, refCount } from 'rxjs/operators';
-import { API_STATUS } from './api-status.constant';
+import { API_STATUS } from './api-status';
 
 export abstract class EntitySelector<S extends EntityState, EntityType = getEntityType<S>> {
     protected constructor(protected store: Store<S>) {}

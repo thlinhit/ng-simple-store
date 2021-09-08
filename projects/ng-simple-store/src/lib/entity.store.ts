@@ -1,6 +1,6 @@
 import { Store } from './store';
 import { getEntityType, isNil, notEmpty } from './helper';
-import { API_STATUS } from './api-status.constant';
+import { API_STATUS } from './api-status';
 
 export interface ApiStatuses {
     [id: string]: API_STATUS;
