@@ -1,6 +1,6 @@
 {
-    "name": "@ng/simple-store",
-    "version": "0.0.1",
+    "name": "@sstore/core",
+    "version": "0.0.2",
     "dependencies": {
         "tslib": "^2.0.0"
     },
